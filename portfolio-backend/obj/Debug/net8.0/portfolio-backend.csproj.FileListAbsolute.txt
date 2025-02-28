@@ -1,4 +1,3 @@
-C:\Users\est.guilhermecc\source\repos\Portfolio-Guilherme\portfolio-backend\portfolio-backend\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\est.guilhermecc\source\repos\Portfolio-Guilherme\portfolio-backend\portfolio-backend\bin\Debug\net8.0\appsettings.json
 C:\Users\est.guilhermecc\source\repos\Portfolio-Guilherme\portfolio-backend\portfolio-backend\bin\Debug\net8.0\portfolio-backend.staticwebassets.endpoints.json
 C:\Users\est.guilhermecc\source\repos\Portfolio-Guilherme\portfolio-backend\portfolio-backend\bin\Debug\net8.0\portfolio-backend.exe
@@ -44,3 +43,4 @@ C:\Users\est.guilhermecc\source\repos\Portfolio-Guilherme\portfolio-backend\port
 C:\Users\est.guilhermecc\source\repos\Portfolio-Guilherme\portfolio-backend\portfolio-backend\obj\Debug\net8.0\portfolio-backend.genruntimeconfig.cache
 C:\Users\est.guilhermecc\source\repos\Portfolio-Guilherme\portfolio-backend\portfolio-backend\obj\Debug\net8.0\ref\portfolio-backend.dll
 C:\Users\est.guilhermecc\source\repos\Portfolio-Guilherme\portfolio-backend\portfolio-backend\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\est.guilhermecc\source\repos\Portfolio-Guilherme\portfolio-backend\portfolio-backend\bin\Debug\net8.0\appsettings.Development.json

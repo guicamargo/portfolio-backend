@@ -1,8 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Minha API com Google Auth",
-    "description": "API para autenticação com Google utilizando JWT.",
+    "title": "Portfolio Backend Guilherme",
     "version": "v1"
   },
   "paths": {

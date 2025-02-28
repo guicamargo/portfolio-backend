@@ -9,12 +9,24 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Adicionando suporte a controllers
 builder.Services.AddControllers();
+
+
+// Adicionando suporte para Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "Portfolio Backend Guilherme",
+        Version = "v1"
+    });
+});
 
 // Carregar configurações do appsettings.json
 var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
 var googleAuthSettings = builder.Configuration.GetSection("GoogleAuth").Get<GoogleAuthSettings>();
-
 if (jwtSettings == null || googleAuthSettings == null)
 {
     throw new Exception("Configurações ausentes em appsettings.json!");
@@ -43,20 +55,51 @@ builder.Services.AddHttpClient();
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 builder.Services.Configure<GoogleAuthSettings>(builder.Configuration.GetSection("GoogleAuth"));
 
-// Adicionar configuração do Swagger
-builder.Services.AddSwaggerConfiguration();
+// Adicionar CORS - Política para permitir qualquer origem, método e cabeçalho
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
-// Usar configuração do Swagger apenas em desenvolvimento
-// if (app.Environment.IsDevelopment())
-// {
-    app.UseSwaggerConfiguration();
-// }
+//// Adicionar página de exceção para desenvolvimento
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseDeveloperExceptionPage();
+//}
 
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Portfolio Backend Guilherme v1");
+
+    // Permitir o Swagger funcionar em HTTP e HTTPS
+    if (app.Environment.IsDevelopment())
+    {
+        c.SwaggerEndpoint("http://localhost:5281/swagger/v1/swagger.json", "HTTP - Portfolio Backend");
+        c.SwaggerEndpoint("https://localhost:7199/swagger/v1/swagger.json", "HTTPS - Portfolio Backend");
+    }
+
+    c.RoutePrefix = "swagger"; // Evita que o Swagger tente carregar diretamente na raiz
+});
+
+
+// Ativar CORS
+app.UseCors("AllowAll");
+
+// Ativar autenticação e autorização
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Mapear controllers
 app.MapControllers();
+
 app.Run();
 
 // Definição das classes de configuração
